@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+class A {
+	int y;
+    int x[] = new int[5];
+    Scanner sc = new Scanner(System.in);
+    
+    void get() {
+        System.out.println("Enter array elements:");
+        for(int i = 0; i < 5; i++) {
+            x[i] = sc.nextInt();
+        }
+    }
+    
+    void put() {
+        System.out.println("The given array is:");
+        for(int i = 0; i < 5; i++) {
+            System.out.println("x[" + i + "] = " + x[i]);
+        }
+    }
+	
+	int sch() {
+		System.out.println("enter element you want to search:");
+		y= sc.nextInt();
+		return y;
+	}
+	void find() {
+		int a=sch();
+		for(int i = 0; i < 5; i++)
+		{
+			if(x[i]==a)
+			{
+				System.out.println("Element found at "+(i+1)+"th position");
+				return;
+				
+			}
+			
+			
+}
+System.out.println("not found");
+	}
+}
+
+class Demo20 {
+    public static void main(String args[]) {
+        A obj = new A(); 
+        obj.get();        
+        obj.put(); 
+	    obj.find();
+    }
+}
