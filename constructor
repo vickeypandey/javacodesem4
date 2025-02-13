@@ -1,0 +1,103 @@
+import java.util.Date;
+import java.util.Scanner;
+
+class Inpatient {
+    private String name;
+    private int age;
+    private int hospNo;
+    private Date dateOfAdmission;
+    private double roomRent;
+
+    // Static variable to keep track of hospital number
+    private static int hospNoCounter = 1;
+
+    // Default Constructor
+    public Inpatient() {
+        this.name = "Unknown";
+        this.age = 0;
+        this.hospNo = hospNoCounter++;
+        this.dateOfAdmission = new Date();
+        this.roomRent = 0.0;
+    }
+
+    // Parameterized Constructor
+    public Inpatient(String name, int age, Date dateOfAdmission, double roomRent) {
+        this.name = name;
+        this.age = age;
+        this.hospNo = hospNoCounter++;
+        this.dateOfAdmission = dateOfAdmission;
+        this.roomRent = roomRent;
+    }
+
+    // Copy Constructor
+    public Inpatient(Inpatient other) {
+        this.name = other.name;
+        this.age = other.age;
+        this.hospNo = hospNoCounter++;
+        this.dateOfAdmission = new Date(other.dateOfAdmission.getTime());
+        this.roomRent = other.roomRent;
+    }
+
+    // Method to input a record
+    public void inputRecord() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Name: ");
+        this.name = sc.nextLine();
+        System.out.print("Enter Age: ");
+        this.age = sc.nextInt();
+        System.out.print("Enter Room Rent: ");
+        this.roomRent = sc.nextDouble();
+        this.hospNo = hospNoCounter++;
+
+        // Input date of admission
+        System.out.println("Enter Date of Admission (yyyy-mm-dd): ");
+        int year = sc.nextInt();
+        int month = sc.nextInt();
+        int day = sc.nextInt();
+        this.dateOfAdmission = new Date(year - 1900, month - 1, day);
+    }
+
+    // Method to display the record
+    public void displayRecord() {
+        System.out.println("Hospital Number: " + hospNo);
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Room Rent: " + roomRent);
+        System.out.println("Date of Admission: " + dateOfAdmission);
+    }
+
+    // Method to check if the date of admission is today's date
+    public void isAdmissionToday() {
+        Date today = new Date();
+        if (today.getYear() == dateOfAdmission.getYear() && today.getMonth() == dateOfAdmission.getMonth() && today.getDate() == dateOfAdmission.getDate()) {
+            System.out.println("The date of admission is today's date.");
+        } else {
+            System.out.println("The date of admission is not today's date.");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Testing the default constructor
+        Inpatient patient1 = new Inpatient();
+        patient1.displayRecord();
+        patient1.isAdmissionToday();
+
+        // Testing the parameterized constructor
+        Inpatient patient2 = new Inpatient("John Doe", 30, new Date(2025 - 1900, 1 - 1, 10), 500.0);
+        patient2.displayRecord();
+        patient2.isAdmissionToday();
+
+        // Testing the copy constructor
+        Inpatient patient3 = new Inpatient(patient2);
+        patient3.displayRecord();
+        patient3.isAdmissionToday();
+
+        // Input record and display
+        Inpatient patient4 = new Inpatient();
+        patient4.inputRecord();
+        patient4.displayRecord();
+        patient4.isAdmissionToday();
+    }
+}
